@@ -6,6 +6,8 @@ Created on Mon Sep 30 20:30:40 2024
 """
 
 import streamlit as st
+import pandas as pd
+import numpy as np
 
 st.sidebar.markdown("<p style='text-align: center;'font-size:18px;'>IM_SINGLE_POSITION - QCCP</p>", unsafe_allow_html=True)
 qccp_margins = pd.DataFrame({'SYMBOL':['Future', 'Call', 'Put'], 'LONG':[1000, 180, 130], 'SHORT':[950, 190, 145]})
