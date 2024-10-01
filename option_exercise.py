@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 
 st.sidebar.markdown("<h4 style='text-align: center; font-size:18px; margin-bottom: 0;'>Client option exercise approach</h4>", unsafe_allow_html=True)
-st.sidebar.selectbox("",("Random scatter","Pro rata"))
+add_selectbox = st.sidebar.selectbox("",("Random scatter","Pro rata"))
 
 qccp_margins = pd.DataFrame({'SYMBOL':['Future', 'Call', 'Put'], 'LONG':[1000, 180, 130], 'SHORT':[950, 190, 145]})
 qccp_margins = qccp_margins.set_index('SYMBOL')
