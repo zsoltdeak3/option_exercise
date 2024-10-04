@@ -31,7 +31,7 @@ if st.session_state['example'] == "Single instrument":
 
   #First part left
   st.sidebar.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Option Attributes</p>", unsafe_allow_html=True)
-  instruments = pd.DataFrame({'Attribute':['Symbol','Type','Contract size','Strike','Underlying'],"Value:['Opt1','Call',1000,500,'Und1',1200]})
+  instruments = pd.DataFrame({'Attribute':['Symbol','Type','Contract size','Strike','Underlying'],Value:['Opt1','Call',1000,500,'Und1',1200]})
   instruments = instruments.set_index('Attribute')
   st.session_state['instruments'] = col1.data_editor(instruments, disabled=('Attribute'), use_container_width=True)
   
