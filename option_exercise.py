@@ -23,17 +23,22 @@ st.session_state['method'] = st.sidebar.selectbox("Client option exercise approa
 
 threshold = st.sidebar.number_input('Exercise threshold (%)', value=1.0, step=0.1,format="%.1f")
 
-st.sidebar.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Settlement prices</p>", unsafe_allow_html=True)
+col1, col2 = st.columns([1,1])
+
+col1.sidebar.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Settlement prices</p>", unsafe_allow_html=True)
 edsp = pd.DataFrame({'SYMBOL':['Und1'], 'EDSP':[1000]})
 edsp = edsp.set_index('SYMBOL')
-st.session_state['edsp'] = st.sidebar.data_editor(edsp, disabled=('SYMBOL'), use_container_width=True)
+st.session_state['edsp'] = col1.sidebar.data_editor(edsp, disabled=('SYMBOL'), use_container_width=True)
+
+#st.sidebar.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Settlement prices</p>", unsafe_allow_html=True)
+#edsp = pd.DataFrame({'SYMBOL':['Und1'], 'EDSP':[1000]})
+#edsp = edsp.set_index('SYMBOL')
+#st.session_state['edsp'] = st.sidebar.data_editor(edsp, disabled=('SYMBOL'), use_container_width=True)
 
 st.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Intstrument attributes</p>", unsafe_allow_html=True)
 instruments = pd.DataFrame({'SYMBOL':['Opt1', 'Opt2', 'Opt3', 'Opt4'], 'Type':['Call', 'Call', 'Put','Put'], 'Contract size':[1000, 1000, 1000,1000], 'Strike':[500,500,500,500],'Underlying':['Und1','Und1','Und1','Und1']})
 instruments = instruments.set_index('SYMBOL')
 st.session_state['instruments'] = st.data_editor(instruments, disabled=('SYMBOL'), use_container_width=True)
-
-col1, col2 = st.columns(2)
 
 with col1:
     st.header("Col1")
