@@ -8,6 +8,16 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+def moneyness (type,strike,edsp):
+  ITM = False
+  if type = 'Call':
+    int_val = edsp-strike
+  else:
+    int_val = strike-edsp
+  mon = int_val/strike
+  if int_val > 0:
+    ITM = True
+
 st.sidebar.markdown("<h4 style='text-align: center; font-size:18px; margin-bottom: -200px;'>Client option exercise approach</h4>", unsafe_allow_html=True)
 st.session_state['method'] = st.sidebar.selectbox("",("Pro rata","Random scatter"),index=0)
 
