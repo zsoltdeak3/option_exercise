@@ -28,7 +28,7 @@ threshold = st.sidebar.number_input('Exercise threshold (%)',min_value=0.0, valu
 col1, col2 = st.columns([2,1])
 #First part left
 col1.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Intstrument attributes</p>", unsafe_allow_html=True)
-instruments = pd.DataFrame({'SYMBOL':['Opt1', 'Opt2', 'Opt3', 'Opt4'], 'Type':['Call', 'Call', 'Put','Put'], 'Contract size':[1000, 1000, 1000,1000], 'Strike':[500,500,500,500],'Underlying':['Und1','Und1','Und1','Und1']})
+instruments = pd.DataFrame({'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1'], 'Type':['Call', 'Call', 'Call','Call'], 'Contract size':[1000, 1000, 1000,1000], 'Strike':[500,500,500,500],'Underlying':['Und1','Und1','Und1','Und1']})
 instruments = instruments.set_index('SYMBOL')
 st.session_state['instruments'] = col1.data_editor(instruments, disabled=('SYMBOL'), use_container_width=True)
 
@@ -44,6 +44,6 @@ st.session_state['edsp'] = col2.data_editor(edsp, disabled=('SYMBOL'), use_conta
 #st.session_state['edsp'] = st.sidebar.data_editor(edsp, disabled=('SYMBOL'), use_container_width=True)
 
 #Client positions
-client_pos = pd.DataFrame({'Client':['Client1', 'Client2', 'Client3', 'Client4'], 'Type':['Call', 'Call', 'Put','Put'], 'Contract size':[1000, 1000, 1000,1000], 'Strike':[500,500,500,500],'Underlying':['Und1','Und1','Und1','Und1']})
+client_pos = pd.DataFrame({'Client':['Client1', 'Client2', 'Client3', 'Client4'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1'], 'Net position':[10, 10, -15,-12]})
 
 
