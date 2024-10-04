@@ -56,7 +56,7 @@ else:
   
   #First part right
   col2.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Settlement prices</p>", unsafe_allow_html=True)
-  edsp = pd.DataFrame({'SYMBOL':['ABC','DEF',GHI], 'EDSP':[1000,1200,1300]})
+  edsp = pd.DataFrame({'SYMBOL':['ABC','DEF','GHI'], 'EDSP':[1000,1200,1300]})
   edsp = edsp.set_index('SYMBOL')
   st.session_state['edsp'] = col2.data_editor(edsp, disabled=('SYMBOL'), use_container_width=True)
   
