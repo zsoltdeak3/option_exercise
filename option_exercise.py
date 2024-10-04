@@ -36,7 +36,7 @@ st.session_state['instruments'] = st.data_editor(instruments, disabled=('SYMBOL'
 col1, col2 = st.columns(2)
 
 with col1:
-    st.header("A cat")
+    st.header("Col1")
 
 with col2:
-    st.header("A dog")
+    st.header("Col2")
