@@ -23,7 +23,7 @@ st.session_state['method'] = st.sidebar.selectbox("Client option exercise approa
 
 threshold = st.sidebar.number_input('Exercise threshold (%)', value=1.0, step=0.1,format="%.1f")
 
-col1, col2 = st.columns([1,1])
+col1, col2 = st.columns([3,1])
 #First part left
 col1.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Intstrument attributes</p>", unsafe_allow_html=True)
 instruments = pd.DataFrame({'SYMBOL':['Opt1', 'Opt2', 'Opt3', 'Opt4'], 'Type':['Call', 'Call', 'Put','Put'], 'Contract size':[1000, 1000, 1000,1000], 'Strike':[500,500,500,500],'Underlying':['Und1','Und1','Und1','Und1']})
