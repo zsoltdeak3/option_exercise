@@ -48,6 +48,6 @@ c1, c2, c3 = st.columns([1,1,1])
 client_pos = pd.DataFrame({'Client':['Client1', 'Client2', 'Client3', 'Client4'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1'], 'Net position':[10, 10, -15,-12]})
 client_pos = client_pos.set_index('Client')
 c2.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Client Positions</p>", unsafe_allow_html=True)
-c2.session_state['client_pos'] = st.data_editor(client_pos, disabled=(['SYMBOL','Client']), use_container_width=True)
+st.session_state['client_pos'] = c2.data_editor(client_pos, disabled=(['SYMBOL','Client']), use_container_width=True)
 
 
