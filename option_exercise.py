@@ -32,3 +32,11 @@ st.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;
 instruments = pd.DataFrame({'SYMBOL':['Opt1', 'Opt2', 'Opt3', 'Opt4'], 'Type':['Call', 'Call', 'Put','Put'], 'Contract size':[1000, 1000, 1000,1000], 'Strike':[500,400,300,200],'Underlying':['Und1','Und1','Und2','Und2']})
 instruments = instruments.set_index('SYMBOL')
 st.session_state['instruments'] = st.data_editor(instruments, disabled=('SYMBOL'), use_container_width=True)
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.header("A cat")
+
+with col2:
+    st.header("A dog")
