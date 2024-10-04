@@ -23,7 +23,7 @@ def moneyness (type,strike,edsp):
 #st.sidebar.markdown("<h4 style='text-align: center; font-size:18px; margin-bottom: -200px;'>Client option exercise approach</h4>", unsafe_allow_html=True)
 st.session_state['example'] = st.sidebar.selectbox("Type of example",("Single instrument","Multi instrument"),index=0)
 
-if example == "Single instrument":
+if st.session_state['example'] == "Single instrument":
 
   st.session_state['method'] = st.sidebar.selectbox("Client option exercise approach",("Pro rata","Random scatter"),index=0)
   
