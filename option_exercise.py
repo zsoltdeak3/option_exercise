@@ -18,8 +18,8 @@ def moneyness (type,strike,edsp):
   if int_val > 0:
     ITM = True
 
-st.sidebar.markdown("<h4 style='text-align: center; font-size:18px; margin-bottom: -200px;'>Client option exercise approach</h4>", unsafe_allow_html=True)
-st.session_state['method'] = st.sidebar.selectbox("",("Pro rata","Random scatter"),index=0)
+#st.sidebar.markdown("<h4 style='text-align: center; font-size:18px; margin-bottom: -200px;'>Client option exercise approach</h4>", unsafe_allow_html=True)
+st.session_state['method'] = st.sidebar.selectbox("Client option exercise approach",("Pro rata","Random scatter"),index=0)
 
 threshold = st.sidebar.number_input('Exercise threshold (%)', value=1.0, step=0.1,format="%.1f")
 
