@@ -50,13 +50,13 @@ else:
   col1, col2 = st.columns([2,1])
   #First part left
   col1.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Intstrument attributes</p>", unsafe_allow_html=True)
-  instruments = pd.DataFrame({'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1'], 'Type':['Call', 'Call', 'Call','Call'], 'Contract size':[1000, 1000, 1000,1000], 'Strike':[500,500,500,500],'Underlying':['Und1','Und1','Und1','Und1']})
+  instruments = pd.DataFrame({'SYMBOL':['Opt1', 'Opt2', 'Opt3', 'Opt4', 'Opt5', 'Opt6'], 'Type':['Call', 'Put', 'Call','Put', 'Call','Put'], 'Contract size':[1000, 1000, 1000,1000, 1000,1000], 'Strike':[500,500,500,500,500,500],'Underlying':['ABC','ABC','DEF','DEF','GHI','GHI']})
   instruments = instruments.set_index('SYMBOL')
   st.session_state['instruments'] = col1.data_editor(instruments, disabled=('SYMBOL'), use_container_width=True)
   
   #First part right
   col2.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Settlement prices</p>", unsafe_allow_html=True)
-  edsp = pd.DataFrame({'SYMBOL':['Und1'], 'EDSP':[1000]})
+  edsp = pd.DataFrame({'SYMBOL':['ABC','DEF',GHI], 'EDSP':[1000,1200,1300]})
   edsp = edsp.set_index('SYMBOL')
   st.session_state['edsp'] = col2.data_editor(edsp, disabled=('SYMBOL'), use_container_width=True)
   
