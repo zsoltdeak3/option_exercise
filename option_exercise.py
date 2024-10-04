@@ -35,19 +35,8 @@ if st.session_state['example'] == "Single instrument":
   instrument = instrument.set_index('Attribute')
   st.session_state['instrument'] = st.sidebar.data_editor(instrument, disabled=('Attribute'), use_container_width=True)
   
-  #First part right
-  st.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Settlement prices</p>", unsafe_allow_html=True)
-  edsp = pd.DataFrame({'SYMBOL':['Und1'], 'EDSP':[1000]})
-  edsp = edsp.set_index('SYMBOL')
-  st.session_state['edsp'] = st.data_editor(edsp, disabled=('SYMBOL'), use_container_width=True)
-  
-  #st.sidebar.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Settlement prices</p>", unsafe_allow_html=True)
-  #edsp = pd.DataFrame({'SYMBOL':['Und1'], 'EDSP':[1000]})
-  #edsp = edsp.set_index('SYMBOL')
-  #st.session_state['edsp'] = st.sidebar.data_editor(edsp, disabled=('SYMBOL'), use_container_width=True)
-  
   #Client positions
-  c1, c2, c3 = st.columns([1,1,1])
+  c1, c2, c3 = st.columns([1,3,1])
   client_pos = pd.DataFrame({'Client':['Client1', 'Client2', 'Client3', 'Client4'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1'], 'Net position':[10, 10, -15,-12]})
   client_pos = client_pos.set_index('Client')
   c2.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Client Positions</p>", unsafe_allow_html=True)
