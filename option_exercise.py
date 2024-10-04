@@ -25,10 +25,10 @@ threshold = st.sidebar.number_input('Exercise threshold (%)', value=1.0, step=0.
 
 col1, col2 = st.columns([1,1])
 
-col1.sidebar.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Settlement prices</p>", unsafe_allow_html=True)
+col1.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Settlement prices</p>", unsafe_allow_html=True)
 edsp = pd.DataFrame({'SYMBOL':['Und1'], 'EDSP':[1000]})
 edsp = edsp.set_index('SYMBOL')
-st.session_state['edsp'] = col1.sidebar.data_editor(edsp, disabled=('SYMBOL'), use_container_width=True)
+st.session_state['edsp'] = col1.data_editor(edsp, disabled=('SYMBOL'), use_container_width=True)
 
 #st.sidebar.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Settlement prices</p>", unsafe_allow_html=True)
 #edsp = pd.DataFrame({'SYMBOL':['Und1'], 'EDSP':[1000]})
