@@ -10,7 +10,7 @@ import numpy as np
 
 def moneyness (type,strike,edsp):
   ITM = False
-  if type = 'Call':
+  if type == 'Call':
     int_val = edsp-strike
   else:
     int_val = strike-edsp
