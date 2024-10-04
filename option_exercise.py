@@ -29,17 +29,17 @@ if st.session_state['example'] == "Single instrument":
   
   threshold = st.sidebar.number_input('Exercise threshold (%)',min_value=0.0, value=1.0, step=0.1,format="%.1f")
 
-  #First part left
+
   st.sidebar.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Option Attributes</p>", unsafe_allow_html=True)
-  instruments = pd.DataFrame({'Attribute':['Symbol','Type','Contract size','Strike','Underlying'],Value:['Opt1','Call',1000,500,'Und1',1200]})
+  instruments = pd.DataFrame({'Attribute':['Symbol','Type','Contract size','Strike','Underlying'],'Value':['Opt1','Call',1000,500,'Und1',1200]})
   instruments = instruments.set_index('Attribute')
   st.session_state['instruments'] = col1.data_editor(instruments, disabled=('Attribute'), use_container_width=True)
   
   #First part right
-  col2.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Settlement prices</p>", unsafe_allow_html=True)
+  st.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Settlement prices</p>", unsafe_allow_html=True)
   edsp = pd.DataFrame({'SYMBOL':['Und1'], 'EDSP':[1000]})
   edsp = edsp.set_index('SYMBOL')
-  st.session_state['edsp'] = col2.data_editor(edsp, disabled=('SYMBOL'), use_container_width=True)
+  st.session_state['edsp'] = st.data_editor(edsp, disabled=('SYMBOL'), use_container_width=True)
   
   #st.sidebar.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Settlement prices</p>", unsafe_allow_html=True)
   #edsp = pd.DataFrame({'SYMBOL':['Und1'], 'EDSP':[1000]})
