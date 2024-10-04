@@ -43,4 +43,7 @@ st.session_state['edsp'] = col2.data_editor(edsp, disabled=('SYMBOL'), use_conta
 #edsp = edsp.set_index('SYMBOL')
 #st.session_state['edsp'] = st.sidebar.data_editor(edsp, disabled=('SYMBOL'), use_container_width=True)
 
+#Client positions
+client_pos = pd.DataFrame({'Client':['Client1', 'Client2', 'Client3', 'Client4'], 'Type':['Call', 'Call', 'Put','Put'], 'Contract size':[1000, 1000, 1000,1000], 'Strike':[500,500,500,500],'Underlying':['Und1','Und1','Und1','Und1']})
+
 
