@@ -42,7 +42,7 @@ if st.session_state['example'] == "Single instrument":
   c2.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Client Positions</p>", unsafe_allow_html=True)
   st.session_state['client_pos'] = c2.data_editor(client_pos, disabled=(['SYMBOL','Client']), use_container_width=True)
 
-  Exercise_button = st.button(label='Settlement calculation')
+  exercise_button = c2.button(label='Settlement calculation')
 else:
   
   st.session_state['method'] = st.sidebar.selectbox("Client option exercise approach",("Pro rata","Random scatter"),index=0)
