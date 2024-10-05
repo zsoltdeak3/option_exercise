@@ -45,7 +45,7 @@ if st.session_state['example'] == "Single instrument":
   #CCP position
   net_client_pos = client_pos['Net position'].sum()
   ccp_pos = {'CCP account':['Net omnibus'], 'SYMBOL':['Opt1'], 'Net position': [net_client_pos]}
-  st.session_state['ccp_pos'] = c2.table(ccp_pos)
+  st.session_state['ccp_pos'] = c2.table(ccp_pos,hide_index=True)
 
   
   exercise_button = c2.button(label='Settlement calculation')
