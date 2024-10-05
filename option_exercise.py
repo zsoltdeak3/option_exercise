@@ -45,6 +45,7 @@ if st.session_state['example'] == "Single instrument":
   #CCP position
   net_client_pos = client_pos['Net position'].sum()
   ccp_pos = {'CCP account':['Net omnibus'], 'SYMBOL':['Opt1'], 'Net position': [net_client_pos]}
+  st.session_state['ccp_pos'] = c2.table(ccp_pos, use_container_width=True)
 
   
   exercise_button = c2.button(label='Settlement calculation')
@@ -73,7 +74,7 @@ else:
   #st.session_state['edsp'] = st.sidebar.data_editor(edsp, disabled=('SYMBOL'), use_container_width=True)
   
   #Client positions
-  c1, c2, c3 = st.columns([1,1,1])
+  c1, c2, c3 = st.columns([1,3,1])
   client_pos = pd.DataFrame({'Client':['Client1', 'Client2', 'Client3', 'Client4'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1'], 'Net position':[10, 10, -15,-12]})
   client_pos = client_pos.set_index('Client')
   c2.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Client Positions</p>", unsafe_allow_html=True)
