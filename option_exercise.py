@@ -42,6 +42,11 @@ if st.session_state['example'] == "Single instrument":
   c2.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Client Positions</p>", unsafe_allow_html=True)
   st.session_state['client_pos'] = c2.data_editor(client_pos, disabled=(['SYMBOL','Client']), use_container_width=True)
 
+  #CCP position
+  net_client_pos = client_pos['Net position'].sum()
+  ccp_pos = {'CCP account':['Net omnibus'], 'SYMBOL':['Opt1'], 'Net position': [net_client_pos]}
+
+  
   exercise_button = c2.button(label='Settlement calculation')
 else:
   
