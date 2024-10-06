@@ -10,9 +10,9 @@ import numpy as np
 
 st.set_page_config(layout="wide")
 
-def moneyness (type,strike,edsp):
+def moneyness (option_type,strike,edsp):
   ITM = False
-  if type == 'Call':
+  if option_type == 'Call':
     int_val = edsp-strike
   else:
     int_val = strike-edsp
@@ -52,12 +52,9 @@ if st.session_state['example'] == "Single instrument":
   exercise_button = c2.button(label='Settlement calculation')
   if exercise_button:
     option_type = st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'Type']['Value'].values[0]
-    strike = st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'Strike']['Value'].values[0]
-    settlement_price = st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'EDSP']['Value'].values[0]
-    st.write(type(option_type))
-    st.write(type(strike))
-    st.write(type(settlement_price))
-    #intrinsic, moneyess, inthemoney = moneyness(option_type,strike,settlement_price)
+    strike = float(st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'Strike']['Value'].values[0])
+    settlement_price = float(st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'EDSP']['Value'].values[0])
+    intrinsic, moneyess, inthemoney = moneyness(option_type,strike,settlement_price)
 else:
   
   st.session_state['method'] = st.sidebar.selectbox("Client option exercise approach",("Pro rata","Random scatter"),index=0)
