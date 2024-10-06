@@ -19,6 +19,7 @@ def moneyness (type,strike,edsp):
   mon = int_val/strike
   if int_val > 0:
     ITM = True
+  return int_val, mon, ITM
 
 #st.sidebar.markdown("<h4 style='text-align: center; font-size:18px; margin-bottom: -200px;'>Client option exercise approach</h4>", unsafe_allow_html=True)
 st.session_state['example'] = st.sidebar.selectbox("Type of example",("Single instrument","Multi instrument"),index=0)
@@ -48,8 +49,12 @@ if st.session_state['example'] == "Single instrument":
   ccp_pos = ccp_pos.set_index('CCP account')
   st.session_state['ccp_pos'] = c2.data_editor(ccp_pos,disabled=(['CCP account','SYMBOL','Net position']),use_container_width=True)
 
-  
   exercise_button = c2.button(label='Settlement calculation')
+  if exercise_button:
+    option_type = st.session_state['instrument'][st.session_state['instrument']['Attribute'] = 'Type']['Value'].values[0]
+    strike = st.session_state['instrument'][st.session_state['instrument']['Strike'] = 'Strike']['Value'].values[0]
+    settlement_price = st.session_state['instrument'][st.session_state['instrument']['Attribute'] = 'EDSP']['Value'].values[0]
+    intrinsic, moneyess, ITM = moneyness(option_type,strike,settlement_price)
 else:
   
   st.session_state['method'] = st.sidebar.selectbox("Client option exercise approach",("Pro rata","Random scatter"),index=0)
