@@ -55,7 +55,7 @@ if st.session_state['example'] == "Single instrument":
     strike = st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'Strike']['Value'].values[0]
     settlement_price = st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'EDSP']['Value'].values[0]
     print(option_type)
-    intrinsic, moneyess, inthemoney = moneyness(option_type,strike,settlement_price)
+    #intrinsic, moneyess, inthemoney = moneyness(option_type,strike,settlement_price)
 else:
   
   st.session_state['method'] = st.sidebar.selectbox("Client option exercise approach",("Pro rata","Random scatter"),index=0)
