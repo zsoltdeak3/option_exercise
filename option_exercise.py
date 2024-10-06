@@ -54,7 +54,9 @@ if st.session_state['example'] == "Single instrument":
     option_type = st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'Type']['Value'].values[0]
     strike = st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'Strike']['Value'].values[0]
     settlement_price = st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'EDSP']['Value'].values[0]
-    print(option_type)
+    st.write(option_type)
+    st.write(strike)
+    st.write(settlement_price)
     #intrinsic, moneyess, inthemoney = moneyness(option_type,strike,settlement_price)
 else:
   
