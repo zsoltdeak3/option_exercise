@@ -55,13 +55,14 @@ if st.session_state['example'] == "Single instrument":
     strike = float(st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'Strike']['Value'].values[0])
     settlement_price = float(st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'EDSP']['Value'].values[0])
     intrinsic, moneyess_perc, inthemoney = moneyness(option_type,strike,settlement_price)
+    moneyess_perc = round(moneyess_perc*100,2)
 
     colu1, colu2 = st.columns([1,1])
     #First part left
     if moneyess_perc >= threshold:
       colu1.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>CCP settlement</p>", unsafe_allow_html=True)
       ccp_settlement = round(net_client_pos * intrinsic,2)
-      pre_ccp_pos2 = pd.Dataframe({'Moneyness':moneyness,'Settlement':ccp_settlement})
+      pre_ccp_pos2 = pd.Dataframe({'Moneyness':[moneyess_perc],'Settlement':[ccp_settlement]})
       ccp_pos2 = pd.concat(ccp_pos,pre_ccp_pos2,index=1)
       st.session_state['ccp_pos2'] = colu1.data_editor(ccp_pos2, disabled=('SYMBOL'), use_container_width=True)
       
