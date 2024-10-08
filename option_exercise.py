@@ -64,7 +64,7 @@ if st.session_state['example'] == "Single instrument":
       ccp_settlement = round(net_client_pos * intrinsic,2)
       pre_ccp_pos2 = pd.DataFrame({'Moneyness':[moneyess_perc],'Settlement':[ccp_settlement]})
       ccp_pos2 = pd.concat([ccp_pos,pre_ccp_pos2],axis=1)
-      st.session_state['ccp_pos2'] = colu1.data_editor(ccp_pos2, disabled=('SYMBOL'), use_container_width=True)
+      st.session_state['ccp_pos2'] = colu1.dataframe(ccp_pos2, use_container_width=True)
       
       #First part right
       colu2.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Broker settlement</p>", unsafe_allow_html=True)
