@@ -45,9 +45,9 @@ if st.session_state['example'] == "Single instrument":
 
   #CCP position
   st.session_state['net_client_pos'] = st.session_state['client_pos']['Net position'].sum()
-  ccp_pos = pd.DataFrame({'CCP account':['Net omnibus'], 'SYMBOL':['Opt1'], 'Net position': [st.session_state['net_client_pos']]})
-  ccp_pos = ccp_pos.set_index('CCP account')
-  st.session_state['ccp_pos'] = c2.data_editor(ccp_pos,disabled=(['CCP account','SYMBOL','Net position']),use_container_width=True)
+  st.session_state['ccp_pos'] = pd.DataFrame({'CCP account':['Net omnibus'], 'SYMBOL':['Opt1'], 'Net position': [st.session_state['net_client_pos']]})
+  st.session_state['ccp_pos_woi'] = st.session_state['ccp_pos'].set_index('CCP account')
+  c2.data_editor(st.session_state['ccp_pos_woi'],disabled=(['CCP account','SYMBOL','Net position']),use_container_width=True)
 
   exercise_button = c2.button(label='Settlement calculation')
   if exercise_button:
@@ -63,7 +63,6 @@ if st.session_state['example'] == "Single instrument":
       colu1.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>CCP settlement</p>", unsafe_allow_html=True)
       st.session_state['ccp_settlement'] = round(st.session_state['net_client_pos'] * intrinsic,2)
       st.session_state['pre_ccp_pos2'] = pd.DataFrame({'Moneyness':[moneyess_perc],'Settlement':[st.session_state['ccp_settlement']]})
-      st.session_state['pre_ccp_pos2'] = st.session_state['pre_ccp_pos2'].set_index('Moneyness')
       st.session_state['ccp_pos2'] = pd.concat([st.session_state['ccp_pos'],st.session_state['pre_ccp_pos2']],axis=1)
       st.session_state['ccp_pos2'] = colu1.dataframe(st.session_state['ccp_pos2'], use_container_width=True)
       
