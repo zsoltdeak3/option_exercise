@@ -37,9 +37,9 @@ if st.session_state['example'] == "Single instrument":
   st.session_state['instrument'] = st.sidebar.data_editor(instrument, use_container_width=True)
 
   ###Let's calculate option parameters###
-  option_type = st.session_state['instrument'].loc('Type','Value')
-  strike = float(st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'Strike']['Value'].values[0])
-  settlement_price = float(st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'EDSP']['Value'].values[0])
+  option_type = st.session_state['instrument'].loc['Type','Value']
+  strike = float(st.session_state['instrument'].loc['Strike','Value'])
+  settlement_price = float(st.session_state['instrument'].loc['EDSP','Value'])
   intrinsic, moneyess_perc, inthemoney = moneyness(option_type,strike,settlement_price)
   moneyess_perc = round(moneyess_perc*100,2)
 
