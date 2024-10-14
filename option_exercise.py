@@ -66,6 +66,7 @@ if st.session_state['example'] == "Single instrument":
       ccp_pos2 = pd.concat([st.session_state['ccp_pos'],st.session_state['pre_ccp_pos2']],axis=1)
       #st.session_state['ccp_pos2'] = colu1.dataframe(ccp_pos2, use_container_width=True)
       st.session_state['ccp_pos2'] = colu1.dataframe(st.session_state['pre_ccp_pos2'], use_container_width=True)
+      st.session_state['ccp_pos3'] = colu1.dataframe(st.session_state['ccp_pos'], use_container_width=True)
       
       #First part right
       colu2.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Broker settlement</p>", unsafe_allow_html=True)
