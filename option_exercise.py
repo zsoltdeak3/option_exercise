@@ -61,9 +61,9 @@ if st.session_state['example'] == "Single instrument":
     #First part left
     if moneyess_perc >= threshold:
       colu1.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>CCP settlement</p>", unsafe_allow_html=True)
-      ccp_settlement = round(net_client_pos * intrinsic,2)
-      pre_ccp_pos2 = pd.DataFrame({'Moneyness':[moneyess_perc],'Settlement':[ccp_settlement]})
-      ccp_pos2 = pd.concat([ccp_pos,pre_ccp_pos2],axis=1)
+      st.session_state['ccp_settlement'] = round(st.session_state['net_client_pos'] * intrinsic,2)
+      st.session_state['pre_ccp_pos2'] = pd.DataFrame({'Moneyness':[moneyess_perc],'Settlement':[st.session_state['ccp_settlement']]})
+      ccp_pos2 = pd.concat([st.session_state['ccp_pos'],st.session_state['pre_ccp_pos2']],axis=1)
       st.session_state['ccp_pos2'] = colu1.dataframe(ccp_pos2, use_container_width=True)
       
       #First part right
