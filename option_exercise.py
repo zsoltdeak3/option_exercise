@@ -63,7 +63,7 @@ if st.session_state['example'] == "Single instrument":
       colu1.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>CCP settlement</p>", unsafe_allow_html=True)
       st.session_state['ccp_settlement'] = round(st.session_state['net_client_pos'] * intrinsic,2)
       st.session_state['pre_ccp_pos2'] = pd.DataFrame({'Moneyness':[moneyess_perc],'Settlement':[st.session_state['ccp_settlement']]})
-      st.session_state['pre_ccp_pos2'] = st.session_state['pre_ccp_pos2'].reset_index(drop=True)
+      st.session_state['pre_ccp_pos2'] = st.session_state['pre_ccp_pos2'].set_index('Moneyness')
       #ccp_pos2 = pd.concat([st.session_state['ccp_pos'],st.session_state['pre_ccp_pos2']],axis=1)
       #st.session_state['ccp_pos2'] = colu1.dataframe(ccp_pos2, use_container_width=True)
       #st.session_state['ccp_pos2'] =
