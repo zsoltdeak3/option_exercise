@@ -44,7 +44,7 @@ if st.session_state['example'] == "Single instrument":
   st.session_state['client_pos'] = c2.data_editor(client_pos, disabled=(['SYMBOL','Client']), use_container_width=True)
 
   #CCP position
-  st.session_state['net_client_pos'] = client_pos['Net position'].sum()
+  st.session_state['net_client_pos'] = st.session_state['client_pos']['Net position'].sum()
   ccp_pos = pd.DataFrame({'CCP account':['Net omnibus'], 'SYMBOL':['Opt1'], 'Net position': [st.session_state['net_client_pos']]})
   ccp_pos = ccp_pos.set_index('CCP account')
   st.session_state['ccp_pos'] = c2.data_editor(ccp_pos,disabled=(['CCP account','SYMBOL','Net position']),use_container_width=True)
