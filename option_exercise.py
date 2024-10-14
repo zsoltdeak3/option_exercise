@@ -33,15 +33,24 @@ if st.session_state['example'] == "Single instrument":
 
   st.sidebar.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Option Attributes</p>", unsafe_allow_html=True)
   instrument = pd.DataFrame({'Attribute':['Symbol','Type','Contract size','Strike','Underlying', 'EDSP'],'Value':['Opt1','Call',1000,500,'Und1',1200]})
-  #instrument = instrument.set_index('Attribute')
   st.session_state['instrument'] = st.sidebar.data_editor(instrument,hide_index=True, disabled=('Attribute'), use_container_width=True)
+
+  ###Let's calculate option parameters###
+  option_type = st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'Type']['Value'].values[0]
+  strike = float(st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'Strike']['Value'].values[0])
+  settlement_price = float(st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'EDSP']['Value'].values[0])
+  intrinsic, moneyess_perc, inthemoney = moneyness(option_type,strike,settlement_price)
+  moneyess_perc = round(moneyess_perc*100,2)
+
+  settlement_parameters = pd.DataFrame({'Attribute':['Moneyness','Intrinsic value','Is in the money'],'Value':[f'{moneyess_perc}%',intrinsic,inthemoney]})
+  st.session_state['settlement_parameters'] = st.sidebar.data_editor(settlement_parameters,hide_index=True, disabled=(['Attribute','Value']), use_container_width=True)
   
   #Client positions
   c1, c2, c3 = st.columns([1,3,1])
-  client_pos = pd.DataFrame({'Client':['Client1', 'Client2', 'Client3', 'Client4'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1'], 'Net position':[10, 10, -15,-12]})
-  client_pos = client_pos.set_index('Client')
+  st.session_state['client_pos'] = pd.DataFrame({'Client':['Client1', 'Client2', 'Client3', 'Client4'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1'], 'Net position':[10, 10, -15,-12]})
+  st.session_state['client_pos_woi'].set_index('Client',inplace = True)
   c2.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Client Positions</p>", unsafe_allow_html=True)
-  st.session_state['client_pos'] = c2.data_editor(client_pos, disabled=(['SYMBOL','Client']), use_container_width=True)
+  c2.data_editor(st.session_state['client_pos_woi'], disabled=(['SYMBOL','Client']), use_container_width=True)
 
   #CCP position
   st.session_state['net_client_pos'] = st.session_state['client_pos']['Net position'].sum()
@@ -51,26 +60,19 @@ if st.session_state['example'] == "Single instrument":
 
   exercise_button = c2.button(label='Settlement calculation')
   if exercise_button:
-    option_type = st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'Type']['Value'].values[0]
-    strike = float(st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'Strike']['Value'].values[0])
-    settlement_price = float(st.session_state['instrument'][st.session_state['instrument']['Attribute'] == 'EDSP']['Value'].values[0])
-    intrinsic, moneyess_perc, inthemoney = moneyness(option_type,strike,settlement_price)
-    moneyess_perc = round(moneyess_perc*100,2)
 
     colu1, colu2 = st.columns([1,1])
     #First part left
     if moneyess_perc >= threshold:
       colu1.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>CCP settlement</p>", unsafe_allow_html=True)
       st.session_state['ccp_settlement'] = round(st.session_state['net_client_pos'] * intrinsic,2)
-      st.session_state['pre_ccp_pos2'] = pd.DataFrame({'Moneyness':[f'{moneyess_perc} %'],'Settlement':[st.session_state['ccp_settlement']]})
+      st.session_state['pre_ccp_pos2'] = pd.DataFrame({'Moneyness':[f'{moneyess_perc}%'],'Settlement':[st.session_state['ccp_settlement']]})
       st.session_state['ccp_pos2'] = pd.concat([st.session_state['ccp_pos'],st.session_state['pre_ccp_pos2']],axis=1).set_index('CCP account')
       st.session_state['ccp_pos2'] = colu1.dataframe(st.session_state['ccp_pos2'], use_container_width=True)
       
       #First part right
       colu2.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Broker settlement</p>", unsafe_allow_html=True)
-      edsp = pd.DataFrame({'SYMBOL':['ABC','DEF','GHI'], 'EDSP':[1000,1200,1300]})
-      edsp = edsp.set_index('SYMBOL')
-      st.session_state['edsp'] = colu2.data_editor(edsp, disabled=('SYMBOL'), use_container_width=True)
+   
 else:
   
   st.session_state['method'] = st.sidebar.selectbox("Client option exercise approach",("Pro rata","Random scatter"),index=0)
