@@ -66,7 +66,7 @@ if st.session_state['example'] == "Single instrument":
 
   st.session_state['edsp_df'] = pd.DataFrame({'Underlying':['ABC'], 'EDSP':[1000]})
   st.session_state['edsp_df_woi'] = st.session_state['edsp_df'].set_index('Underlying')
-  c2.markdown("<p style='text-align: center, margin-top: -30px, margin-bottom: -15px,'font-size:18px,'>Option expiry settlement prices (EDSP)</p>", unsafe_allow_html=True)
+  c2.markdown("<p style='text-align: center, margin-top: 15px, margin-bottom: 10px,'font-size:18px,'>Option expiry settlement prices (EDSP)</p>", unsafe_allow_html=True)
   c2.data_editor(st.session_state['edsp_df_woi'], use_container_width=True)
   
   st.session_state['client_pos'] = pd.DataFrame({'Client':['Client1', 'Client2', 'Client3', 'Client4'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1'], 'Net position':[10, 10, -15,-12]})
