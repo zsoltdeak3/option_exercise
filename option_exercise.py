@@ -51,14 +51,14 @@ if st.session_state['example'] == "Single instrument":
   st.markdown(
     """
     <div style="
-        background-color: #f0f0f0; /* Light grey background for emphasis */
+        background-color: #f0f0f0;
         padding: 10px; 
-        border-radius: 5px;
+        border-radius: 10px;
         text-align: center;
         color: black;
         font-size: 14px;
         border: 1px solid #ddd;">
-        1. Step: QCCP disseminates the Option EDSP prices through sFTP report after 12:15pm
+        <b>Step 1.:</b> QCCP disseminates the Option EDSP prices through sFTP report after 12:15pm
     </div>
     """,
     unsafe_allow_html=True
