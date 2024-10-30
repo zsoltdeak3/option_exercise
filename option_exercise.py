@@ -26,7 +26,7 @@ st.session_state['example'] = st.sidebar.selectbox("Type of example",("Single in
 
 if st.session_state['example'] == "Single instrument":
 
-  st.session_state['method'] = st.sidebar.selectbox("Client option exercise approach","Pro rata",index=0)
+  st.session_state['method'] = st.sidebar.selectbox("Client option exercise approach",("Pro rata","Random scatter"),index=0)
   
   threshold = st.sidebar.number_input('CCP exercise threshold (%)',min_value=0.0, value=1.0, step=0.1,format="%.1f")
 
