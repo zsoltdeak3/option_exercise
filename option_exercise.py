@@ -56,9 +56,9 @@ if st.session_state['example'] == "Single instrument":
         border-radius: 10px;
         text-align: center;
         color: black;
-        font-size: 14px;
+        font-size: 18px;
         border: 1px solid #ddd;">
-        <b>Step 1.:</b> QCCP disseminates the Option EDSP prices through sFTP report after 12:15pm
+        <b>Step 1:</b> QCCP disseminates the Option EDSP prices through sFTP report after 12:15pm
     </div>
     """,
     unsafe_allow_html=True
