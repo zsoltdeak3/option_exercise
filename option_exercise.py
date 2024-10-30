@@ -68,7 +68,7 @@ if st.session_state['example'] == "Single instrument":
   st.session_state['edsp_df_woi'] = st.session_state['edsp_df'].set_index('Underlying')
   c2.markdown(
     """
-    <p style="text-align: center; margin-top: 15px; margin-bottom: 10px; font-size: 18px;">
+    <p style="text-align: center; margin-top: 15px; margin-bottom: 5px; font-size: 16px;">
         Option expiry settlement prices (EDSP)
     </p>
     """,
