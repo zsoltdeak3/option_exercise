@@ -48,7 +48,14 @@ if st.session_state['example'] == "Single instrument":
   settlement_parameters = pd.DataFrame({'Attribute':['Moneyness','Intrinsic value','Is in the money'],'Value':[f'{moneyess_perc}%',intrinsic,inthemoney]})
   st.session_state['settlement_parameters'] = st.sidebar.data_editor(settlement_parameters,hide_index=True, disabled=(['Attribute','Value']), use_container_width=True)
 
-  st.text_area(""," 1. Step: QCCP disseminates the Option EDSP prices through sFTP report after 12:15pm", disabled=True, height=1)
+  st.markdown(
+    """
+    <div style="text-align: center; color: black; font-size: 14px;">
+        1. Step: QCCP disseminates the Option EDSP prices through sFTP report after 12:15pm
+    </div>
+    """,
+    unsafe_allow_html=True)
+  
   #Client positions
   c1, c2, c3 = st.columns([1,3,1])
   st.session_state['client_pos'] = pd.DataFrame({'Client':['Client1', 'Client2', 'Client3', 'Client4'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1'], 'Net position':[10, 10, -15,-12]})
