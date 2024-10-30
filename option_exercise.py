@@ -58,14 +58,17 @@ if st.session_state['example'] == "Single instrument":
         color: black;
         font-size: 18px;
         border: 1px solid #ddd;">
-        <b>Step 1:</b> QCCP disseminates the Option EDSP prices through sFTP report after 12:15pm
-    </div>
-    """,
-    unsafe_allow_html=True
-  )
-  
-  #Client positions
+        <b>Step 1:</b> QCCP disseminates the Option EDSP prices through sFTP report after 12:15pm </div>
+    """,unsafe_allow_html=True)
+
   c1, c2, c3 = st.columns([1,3,1])
+  #EDSP
+
+  st.session_state['edsp_df'] = pd.DataFrame({'Underlying':['ABC'], 'EDSP':[1000]})
+  st.session_state['edsp_df_woi'] = st.session_state['edsp_df'].set_index('Underlying')
+  c2.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Option expiry settlement prices (EDSP)</p>", unsafe_allow_html=True)
+  c2.data_editor(st.session_state['edsp_df_woi'], use_container_width=True)
+  
   st.session_state['client_pos'] = pd.DataFrame({'Client':['Client1', 'Client2', 'Client3', 'Client4'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1'], 'Net position':[10, 10, -15,-12]})
   st.session_state['client_pos_woi'] = st.session_state['client_pos'].set_index('Client')
   c2.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Client Positions</p>", unsafe_allow_html=True)
