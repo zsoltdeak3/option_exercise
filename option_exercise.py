@@ -50,11 +50,19 @@ if st.session_state['example'] == "Single instrument":
 
   st.markdown(
     """
-    <div style="text-align: center; color: black; font-size: 14px;">
+    <div style="
+        background-color: #f0f0f0; /* Light grey background for emphasis */
+        padding: 10px; 
+        border-radius: 5px;
+        text-align: center;
+        color: black;
+        font-size: 14px;
+        border: 1px solid #ddd;">
         1. Step: QCCP disseminates the Option EDSP prices through sFTP report after 12:15pm
     </div>
     """,
-    unsafe_allow_html=True)
+    unsafe_allow_html=True
+  )
   
   #Client positions
   c1, c2, c3 = st.columns([1,3,1])
