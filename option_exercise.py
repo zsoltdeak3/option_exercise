@@ -99,7 +99,7 @@ if st.session_state['example'] == "Single instrument":
   #   Broker positions
   
   st.session_state['client_pos'] = pd.DataFrame({'Account':['Client1', 'Client2', 'Client3', 'Client4','House'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1','Opt1'], 'Net position':[10, 10, -15,-12, 19]})
-  st.session_state['client_pos_woi'] = st.session_state['client_pos'].set_index('Client')
+  st.session_state['client_pos_woi'] = st.session_state['client_pos'].set_index('Account')
   st.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Broker Positions</p>", unsafe_allow_html=True)
   st.data_editor(st.session_state['client_pos_woi'], disabled=(['SYMBOL','Client']), use_container_width=True)
 
