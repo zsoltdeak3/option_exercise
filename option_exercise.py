@@ -103,7 +103,7 @@ if st.session_state['example'] == "Single instrument":
 
   #   Broker positions
 
-  st.markdown("<p style='text-align: center; margin-top: 15px; margin-bottom: 5px;'font-size:16px;'>Broker Positions in FO system</p>", unsafe_allow_html=True)
+  st.markdown("<p style='text-align: center; margin-top: 15px; margin-bottom: 5px;'font-size:16px;'>Broker Positions in FO system (editable)</p>", unsafe_allow_html=True)
   
   broker_pos = {'Account':['Client1', 'Client2', 'Client3', 'Client4','House'],'Account type':['Client', 'Client', 'Client', 'Client','House'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1','Opt1'], 'Net position':[10, 10, -15,-12, 19]}
   st.session_state['broker_pos'] = pd.DataFrame(broker_pos)
@@ -112,7 +112,7 @@ if st.session_state['example'] == "Single instrument":
   st.session_state['broker_pos'].update(edited_broker_pos.reset_index())
   #   CCP position
 
-  st.markdown("<p style='text-align: center; margin-top: 15px; margin-bottom: 5px;'font-size:16px;'>Broker Positions in CCP</p>", unsafe_allow_html=True)
+  st.markdown("<p style='text-align: center; margin-top: 15px; margin-bottom: 5px;'font-size:16px;'>Broker Positions in CCP (non-editable)</p>", unsafe_allow_html=True)
   
   st.session_state['net_client_pos'] = st.session_state['broker_pos'][st.session_state['broker_pos']['Account type'] == 'Client']['Net position'].sum()
   st.session_state['net_house_pos'] = st.session_state['broker_pos'][st.session_state['broker_pos']['Account type'] == 'House']['Net position'].sum()
@@ -120,6 +120,20 @@ if st.session_state['example'] == "Single instrument":
   st.session_state['ccp_pos'] = pd.DataFrame({'CCP account':['Net omnibus', 'House'], 'SYMBOL':['Opt1','Opt1'], 'Net position': [st.session_state['net_client_pos'],st.session_state['net_house_pos']]})
   st.session_state['ccp_pos_woi'] = st.session_state['ccp_pos'].set_index('CCP account')
   st.data_editor(st.session_state['ccp_pos_woi'],disabled=(['CCP account','SYMBOL','Net position']),use_container_width=True)
+
+  ### To decide if options should be exercised ###
+  st.markdown(
+    """
+    <div style="
+        background-color: #f0f0f0;
+        padding: 10px; 
+        border-radius: 10px;
+        text-align: center;
+        color: black;
+        font-size: 18px;
+        border: 1px solid #ddd;">
+        <b>Step 3:</b> Determine whether to exercise options. </div>
+    """,unsafe_allow_html=True)
 
  
   if exercise_button:
