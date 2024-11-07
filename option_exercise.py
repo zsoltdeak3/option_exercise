@@ -92,8 +92,8 @@ if st.session_state['example'] == "Single instrument":
   
   st.session_state['client_pos'] = pd.DataFrame({'Client':['Client1', 'Client2', 'Client3', 'Client4'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1'], 'Net position':[10, 10, -15,-12]})
   st.session_state['client_pos_woi'] = st.session_state['client_pos'].set_index('Client')
-  c2.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Client Positions</p>", unsafe_allow_html=True)
-  c2.data_editor(st.session_state['client_pos_woi'], disabled=(['SYMBOL','Client']), use_container_width=True)
+  st.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Client Positions</p>", unsafe_allow_html=True)
+  st.data_editor(st.session_state['client_pos_woi'], disabled=(['SYMBOL','Client']), use_container_width=True)
 
   #CCP position
   st.session_state['net_client_pos'] = st.session_state['client_pos']['Net position'].sum()
