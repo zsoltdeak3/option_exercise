@@ -40,7 +40,6 @@ if st.session_state['example'] == "Single instrument":
   ###Editable option attributes###
   st.sidebar.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Option Attributes</p>", unsafe_allow_html=True)
   instrument = pd.DataFrame({'Attribute':['Symbol','Type','Contract size','Strike','Underlying', 'EDSP'],'Value':['Opt1','Call',1000,500,'Und1',1200]})
-  instrument.set_index('Attribute',inplace = True)
   st.session_state['instrument'] = st.sidebar.data_editor(instrument, use_container_width=True)
 
   ###Let's calculate option parameters###
@@ -106,7 +105,7 @@ if st.session_state['example'] == "Single instrument":
   st.session_state['broker_pos'] = pd.DataFrame(broker_pos)
   
   edited_broker_pos = st.data_editor(st.session_state['broker_pos'].set_index('Account'), disabled=(['SYMBOL','Client']), use_container_width=True)
-  st.session_state['broker_pos'].update(edited_broker_pos.reset_index())
+  st.session_state['broker_pos'].update(edited_broker_pos._index())
   #   CCP position
 
   st.markdown("<p style='text-align: center; margin-top: 15px; margin-bottom: 5px;'font-size:16px;'>Broker Positions in CCP</p>", unsafe_allow_html=True)
