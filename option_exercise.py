@@ -14,7 +14,7 @@ def moneyness (option_type,strike,edsp):
     int_val = max(0, edsp - strike) if option_type == "Call" else max(0, strike - edsp)
     mon = (edsp / strike) - 1
     ITM = moneyness_perc > 0 if option_type == "Call" else moneyness_perc < 0
-  return int_val, mon, ITM
+    return int_val, mon, ITM
 
 ### SIDEBAR ###
 
