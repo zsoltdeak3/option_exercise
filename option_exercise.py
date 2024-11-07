@@ -130,7 +130,7 @@ if st.session_state['example'] == "Single instrument":
         <b>Step 3:</b> Determine whether to exercise options. </div>
     """,unsafe_allow_html=True)
     #Empty line
-  st.markdown("<p style='text-align: center; margin-top: 5px; margin-bottom: 5px;'font-size:16px;"", unsafe_allow_html=True)  
+  st.markdown("<p style='text-align: center; margin-top: 5px; margin-bottom: 5px;'font-size:16px;", unsafe_allow_html=True)  
 
     ### SETTLEMENT FLOWS ###
   st.markdown(
