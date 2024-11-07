@@ -132,8 +132,8 @@ if st.session_state['example'] == "Single instrument":
     """,unsafe_allow_html=True)
     #Empty line
   st.markdown("<p style='text-align: center; margin-top: 5px; margin-bottom: 5px;'font-size:16px;", unsafe_allow_html=True)  
-  if decision_table not in session_state:  
-      decision_table = pd.concat([])  
+  if 'decision_table' not in session_state:  
+      decision_table = pd.concat([st.session_state['ccp_pos'].drop(columns=[])])  
     ### SETTLEMENT FLOWS ###
   st.markdown(
     """
