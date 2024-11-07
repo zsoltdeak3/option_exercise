@@ -28,9 +28,10 @@ if st.session_state['example'] == "Single instrument":
 
   st.session_state['method'] = st.sidebar.selectbox("Client option exercise approach",("Pro rata","Random scatter"),index=0)
   
-  threshold = st.sidebar.number_input('CCP exercise threshold (%)',min_value=0.0, value=1.0, step=0.1,format="%.1f")
+  'threshold = st.sidebar.number_input('CCP exercise threshold (%)',min_value=0.0, value=1.0, step=0.1,format="%.1f")
 
-  costofexercise = st.sidebar.number_input('Broker exercise fee (QAR)',min_value=0.0, value=0.5, step=0.1,format="%.1f")
+  CCPexercisefee = st.sidebar.number_input('Broker exercise fee (QAR)',min_value=0.0, value=0.5, step=0.1,format="%.1f")
+  Brokerexercisefee = st.sidebar.number_input('Broker exercise fee (QAR)',min_value=0.0, value=0.5, step=0.1,format="%.1f")
 
   ###Editable option attributes###
   st.sidebar.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Option Attributes</p>", unsafe_allow_html=True)
@@ -62,7 +63,8 @@ if st.session_state['example'] == "Single instrument":
     """,unsafe_allow_html=True)
 
   c1, c2, c3 = st.columns([1,3,1])
-  #EDSP
+  
+  #     EDSP
 
   st.session_state['edsp_df'] = pd.DataFrame({'Underlying':['ABC'], 'EDSP':[1000]})
   st.session_state['edsp_df_woi'] = st.session_state['edsp_df'].set_index('Underlying')
@@ -74,6 +76,19 @@ if st.session_state['example'] == "Single instrument":
     """,
     unsafe_allow_html=True)
   c2.data_editor(st.session_state['edsp_df_woi'], use_container_width=True)
+
+  st.markdown(
+    """
+    <div style="
+        background-color: #f0f0f0;
+        padding: 10px; 
+        border-radius: 10px;
+        text-align: center;
+        color: black;
+        font-size: 18px;
+        border: 1px solid #ddd;">
+        <b>Step 1:</b> As trading stops with expiring instruments at 12:15pm, the final positions are known for both client and house accounts </div>
+    """,unsafe_allow_html=True)
   
   st.session_state['client_pos'] = pd.DataFrame({'Client':['Client1', 'Client2', 'Client3', 'Client4'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1'], 'Net position':[10, 10, -15,-12]})
   st.session_state['client_pos_woi'] = st.session_state['client_pos'].set_index('Client')
