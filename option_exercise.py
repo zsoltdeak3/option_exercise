@@ -98,15 +98,17 @@ if st.session_state['example'] == "Single instrument":
 
   #   Broker positions
   
-  st.session_state['client_pos'] = pd.DataFrame({'Account':['Client1', 'Client2', 'Client3', 'Client4','House'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1','Opt1'], 'Net position':[10, 10, -15,-12, 19]})
-  st.session_state['client_pos_woi'] = st.session_state['client_pos'].set_index('Account')
+  st.session_state['broker_pos'] = pd.DataFrame({'Account':['Client1', 'Client2', 'Client3', 'Client4','House'],'Account type':['Client', 'Client', 'Client', 'Client','House'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1','Opt1'], 'Net position':[10, 10, -15,-12, 19]})
+  st.session_state['broker_pos_woi'] = st.session_state['broker_pos'].set_index('Account')
   st.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Broker Positions</p>", unsafe_allow_html=True)
   st.data_editor(st.session_state['client_pos_woi'], disabled=(['SYMBOL','Client']), use_container_width=True)
 
   #   CCP position
   
-  st.session_state['net_client_pos'] = st.session_state['client_pos']['Net position'].sum()
-  st.session_state['ccp_pos'] = pd.DataFrame({'CCP account':['Net omnibus'], 'SYMBOL':['Opt1'], 'Net position': [st.session_state['net_client_pos']]})
+  st.session_state['net_client_pos'] = st.session_state['broker_pos'][st.session_state['broker_pos']['Account type'] == 'Client']['Net position'].sum()
+  st.session_state['net_house_pos'] = st.session_state['broker_pos'][st.session_state['broker_pos']['Account type'] == 'House']['Net position'].sum()
+  
+  st.session_state['ccp_pos'] = pd.DataFrame({'CCP account':['Net omnibus', 'House'], 'SYMBOL':['Opt1','Opt1'], 'Net position': [st.session_state['net_client_pos'],st.session_state['net_house_pos']]})
   st.session_state['ccp_pos_woi'] = st.session_state['ccp_pos'].set_index('CCP account')
   st.data_editor(st.session_state['ccp_pos_woi'],disabled=(['CCP account','SYMBOL','Net position']),use_container_width=True)
 
