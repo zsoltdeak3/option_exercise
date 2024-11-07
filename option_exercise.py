@@ -30,8 +30,8 @@ if st.session_state['example'] == "Single instrument":
   
   #threshold = st.sidebar.number_input('CCP exercise threshold (%)',min_value=0.0, value=1.0, step=0.1,format="%.1f")
   # Exercise fees
-  CCPexercisefee = st.sidebar.number_input('CCP exercise fee (QAR)',min_value=0.0, value=0.5, step=0.1,format="%.1f")
-  Brokerexercisefee = st.sidebar.number_input('Broker exercise fee (QAR)',min_value=0.0, value=0.5, step=0.1,format="%.1f")
+  CCPexercisefee = st.sidebar.number_input('CCP exercise fee (QAR)',min_value=0.00, value=0.50, step=0.01,format="%.1f")
+  Brokerexercisefee = st.sidebar.number_input('Broker exercise fee (QAR)',min_value=0.00, value=0.50, step=0.01,format="%.1f")
 
   ###Editable option attributes###
   st.sidebar.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Option Attributes</p>", unsafe_allow_html=True)
