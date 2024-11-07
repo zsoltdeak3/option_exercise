@@ -21,8 +21,12 @@ def moneyness (option_type,strike,edsp):
     ITM = True
   return int_val, mon, ITM
 
+### SIDEBAR ###
+
 #st.sidebar.markdown("<h4 style='text-align: center; font-size:18px; margin-bottom: -200px;'>Client option exercise approach</h4>", unsafe_allow_html=True)
 st.session_state['example'] = st.sidebar.selectbox("Type of example",("Single instrument","Multi instrument"),index=0)
+
+### SINGLE INSTRUMENT ###
 
 if st.session_state['example'] == "Single instrument":
 
@@ -49,6 +53,8 @@ if st.session_state['example'] == "Single instrument":
   settlement_parameters = pd.DataFrame({'Attribute':['Moneyness','Intrinsic value','Is in the money'],'Value':[f'{moneyess_perc}%',intrinsic,inthemoney]})
   st.session_state['settlement_parameters'] = st.sidebar.data_editor(settlement_parameters,hide_index=True, disabled=(['Attribute','Value']), use_container_width=True)
 
+  ### MAIN SCREEN ###
+  
   st.markdown(
     """
     <div style="
@@ -89,17 +95,20 @@ if st.session_state['example'] == "Single instrument":
         border: 1px solid #ddd;">
         <b>Step 2:</b> As trading stops with expiring instruments at 12:15pm, the final positions are known for both client and house accounts. The decision to exercise or not can be made. </div>
     """,unsafe_allow_html=True)
+
+  #   Broker positions
   
-  st.session_state['client_pos'] = pd.DataFrame({'Client':['Client1', 'Client2', 'Client3', 'Client4'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1'], 'Net position':[10, 10, -15,-12]})
+  st.session_state['client_pos'] = pd.DataFrame({'Account':['Client1', 'Client2', 'Client3', 'Client4','House'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1','Opt1'], 'Net position':[10, 10, -15,-12, 19]})
   st.session_state['client_pos_woi'] = st.session_state['client_pos'].set_index('Client')
-  st.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Client Positions</p>", unsafe_allow_html=True)
+  st.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Broker Positions</p>", unsafe_allow_html=True)
   st.data_editor(st.session_state['client_pos_woi'], disabled=(['SYMBOL','Client']), use_container_width=True)
 
-  #CCP position
+  #   CCP position
+  
   st.session_state['net_client_pos'] = st.session_state['client_pos']['Net position'].sum()
   st.session_state['ccp_pos'] = pd.DataFrame({'CCP account':['Net omnibus'], 'SYMBOL':['Opt1'], 'Net position': [st.session_state['net_client_pos']]})
   st.session_state['ccp_pos_woi'] = st.session_state['ccp_pos'].set_index('CCP account')
-  c2.data_editor(st.session_state['ccp_pos_woi'],disabled=(['CCP account','SYMBOL','Net position']),use_container_width=True)
+  st.data_editor(st.session_state['ccp_pos_woi'],disabled=(['CCP account','SYMBOL','Net position']),use_container_width=True)
 
   exercise_button = c2.button(label='Settlement calculation')
   if exercise_button:
@@ -115,7 +124,8 @@ if st.session_state['example'] == "Single instrument":
       
       #First part right
       colu2.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Broker settlement</p>", unsafe_allow_html=True)
-   
+
+### MULTI INSTRUMENT ###
 else:
   
   st.session_state['method'] = st.sidebar.selectbox("Client option exercise approach",("Pro rata","Random scatter"),index=0)
