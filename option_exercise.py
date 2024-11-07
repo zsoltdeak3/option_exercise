@@ -112,9 +112,10 @@ if st.session_state['example'] == "Single instrument":
   st.session_state['net_client_pos'] = st.session_state['broker_pos'][st.session_state['broker_pos']['Account type'] == 'Client']['Net position'].sum()
   st.session_state['net_house_pos'] = st.session_state['broker_pos'][st.session_state['broker_pos']['Account type'] == 'House']['Net position'].sum()
 
-  st.session_state['ccp_pos'] = pd.DataFrame({'CCP account':['Net omnibus', 'House'], 'SYMBOL':['Opt1','Opt1'], 'Net position': [st.session_state['net_client_pos'],st.session_state['net_house_pos']]})
-  st.session_state['ccp_pos_woi'] = st.session_state['ccp_pos'].set_index('CCP account')
-  st.data_editor(st.session_state['ccp_pos_woi'],disabled=(['CCP account','SYMBOL','Net position']),use_container_width=True)
+  ccp_pos = {'CCP account':['Net omnibus', 'House'], 'SYMBOL':['Opt1','Opt1'], 'Net position': [st.session_state['net_client_pos'],st.session_state['net_house_pos']]}
+  st.session_state['ccp_pos'] = pd.DataFrame(ccp_pos.set_index('CCP account'))
+  edited_ccp_pos = st.data_editor(st.session_state['ccp_pos'],disabled=(['CCP account','SYMBOL','Net position']),use_container_width=True)
+  st.session_state['ccp_pos'].update(edited_ccp_pos.reset_index())
 
   ### To decide if options should be exercised ###
   st.markdown(
@@ -131,7 +132,8 @@ if st.session_state['example'] == "Single instrument":
     """,unsafe_allow_html=True)
     #Empty line
   st.markdown("<p style='text-align: center; margin-top: 5px; margin-bottom: 5px;'font-size:16px;", unsafe_allow_html=True)  
-
+  if decision_table not in session_state:  
+      decision_table = pd.concat([])  
     ### SETTLEMENT FLOWS ###
   st.markdown(
     """
