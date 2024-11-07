@@ -30,8 +30,8 @@ if st.session_state['example'] == "Single instrument":
   
   #threshold = st.sidebar.number_input('CCP exercise threshold (%)',min_value=0.0, value=1.0, step=0.1,format="%.1f")
   # Exercise fees
-  CCPexercisefee = st.sidebar.number_input('CCP exercise fee (QAR)',min_value=0.00, value=0.50, step=0.01,format="%.1f")
-  Brokerexercisefee = st.sidebar.number_input('Broker exercise fee (QAR)',min_value=0.00, value=0.50, step=0.01,format="%.1f")
+  CCPexercisefee = st.sidebar.number_input('CCP exercise fee (QAR)',min_value=0.00, value=0.50, step=0.01,format="%.2f")
+  Brokerexercisefee = st.sidebar.number_input('Broker exercise fee (QAR)',min_value=0.00, value=0.50, step=0.01,format="%.2f")
 
   ###Editable option attributes###
   st.sidebar.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Option Attributes</p>", unsafe_allow_html=True)
@@ -87,7 +87,7 @@ if st.session_state['example'] == "Single instrument":
         color: black;
         font-size: 18px;
         border: 1px solid #ddd;">
-        <b>Step 1:</b> As trading stops with expiring instruments at 12:15pm, the final positions are known for both client and house accounts </div>
+        <b>Step 2:</b> As trading stops with expiring instruments at 12:15pm, the final positions are known for both client and house accounts. The decision to exercise or not can be made. </div>
     """,unsafe_allow_html=True)
   
   st.session_state['client_pos'] = pd.DataFrame({'Client':['Client1', 'Client2', 'Client3', 'Client4'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1'], 'Net position':[10, 10, -15,-12]})
