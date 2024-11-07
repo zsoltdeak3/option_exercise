@@ -11,14 +11,9 @@ import numpy as np
 st.set_page_config(layout="wide")
 
 def moneyness (option_type,strike,edsp):
-  ITM = False
-  if option_type == 'Call':
-    int_val = edsp-strike
-  else:
-    int_val = strike-edsp
-  mon = int_val/strike
-  if int_val > 0:
-    ITM = True
+    intrinsic = max(0, edsp - strike) if option_type == "Call" else max(0, strike - edsp)
+    moneyness_perc = (edsp / strike) - 1
+    inthemoney = moneyness_perc > 0 if option_type == "Call" else moneyness_perc < 0
   return int_val, mon, ITM
 
 ### SIDEBAR ###
