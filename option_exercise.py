@@ -53,6 +53,8 @@ if st.session_state['example'] == "Single instrument":
   settlement_parameters = pd.DataFrame({'Attribute':['Moneyness','Intrinsic value','Is in the money'],'Value':[f'{moneyess_perc}%',intrinsic,inthemoney]})
   st.session_state['settlement_parameters'] = st.sidebar.data_editor(settlement_parameters,hide_index=True, disabled=(['Attribute','Value']), use_container_width=True)
 
+  exercise_button = st.sidebar.button(label='Settlement calculation')
+  
   ### MAIN SCREEN ###
   
   st.markdown(
@@ -116,7 +118,7 @@ if st.session_state['example'] == "Single instrument":
   st.session_state['ccp_pos_woi'] = st.session_state['ccp_pos'].set_index('CCP account')
   st.data_editor(st.session_state['ccp_pos_woi'],disabled=(['CCP account','SYMBOL','Net position']),use_container_width=True)
 
-  exercise_button = c2.button(label='Settlement calculation')
+ 
   if exercise_button:
 
     colu1, colu2 = st.columns([1,1])
