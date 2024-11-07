@@ -28,8 +28,8 @@ if st.session_state['example'] == "Single instrument":
 
   st.session_state['method'] = st.sidebar.selectbox("Client option exercise approach",("Pro rata","Random scatter"),index=0)
   
-  'threshold = st.sidebar.number_input('CCP exercise threshold (%)',min_value=0.0, value=1.0, step=0.1,format="%.1f")
-
+  #threshold = st.sidebar.number_input('CCP exercise threshold (%)',min_value=0.0, value=1.0, step=0.1,format="%.1f")
+  # Exercise fees
   CCPexercisefee = st.sidebar.number_input('Broker exercise fee (QAR)',min_value=0.0, value=0.5, step=0.1,format="%.1f")
   Brokerexercisefee = st.sidebar.number_input('Broker exercise fee (QAR)',min_value=0.0, value=0.5, step=0.1,format="%.1f")
 
@@ -106,7 +106,7 @@ if st.session_state['example'] == "Single instrument":
 
     colu1, colu2 = st.columns([1,1])
     #First part left
-    if moneyess_perc >= threshold:
+    if intrinsic > CCPexercisefee:
       colu1.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>CCP settlement</p>", unsafe_allow_html=True)
       st.session_state['ccp_settlement'] = round(st.session_state['net_client_pos'] * intrinsic,2)
       st.session_state['pre_ccp_pos2'] = pd.DataFrame({'Moneyness':[f'{moneyess_perc}%'],'Settlement':[st.session_state['ccp_settlement']]})
