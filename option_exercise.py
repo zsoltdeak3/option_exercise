@@ -135,6 +135,20 @@ if st.session_state['example'] == "Single instrument":
         <b>Step 3:</b> Determine whether to exercise options. </div>
     """,unsafe_allow_html=True)
 
+
+    ### SETTLEMENT FLOWS ###
+  st.markdown(
+    """
+    <div style="
+        background-color: #f0f0f0;
+        padding: 10px; 
+        border-radius: 10px;
+        text-align: center;
+        color: black;
+        font-size: 18px;
+        border: 1px solid #ddd;">
+        <b>Step 4:</b> Calculate settlement flows. </div>
+    """,unsafe_allow_html=True)
  
   if exercise_button:
 
