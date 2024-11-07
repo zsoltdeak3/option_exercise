@@ -100,9 +100,11 @@ if st.session_state['example'] == "Single instrument":
 
   st.markdown("<p style='text-align: center; margin-top: 15px; margin-bottom: 5px;'font-size:16px;'>Broker Positions in FO system</p>", unsafe_allow_html=True)
   
-  st.session_state['broker_pos'] = pd.DataFrame({'Account':['Client1', 'Client2', 'Client3', 'Client4','House'],'Account type':['Client', 'Client', 'Client', 'Client','House'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1','Opt1'], 'Net position':[10, 10, -15,-12, 19]})
-  st.data_editor(st.session_state['broker_pos'].set_index('Account'), disabled=(['SYMBOL','Client']), use_container_width=True)
-  st.session_state['broker_pos'].update(st.session_state['broker_pos'].reset_index())
+  broker_pos = {'Account':['Client1', 'Client2', 'Client3', 'Client4','House'],'Account type':['Client', 'Client', 'Client', 'Client','House'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1','Opt1'], 'Net position':[10, 10, -15,-12, 19]}
+  st.session_state['broker_pos'] = pd.DataFrame(broker_pos)
+  
+  edited_broker_pos = st.data_editor(st.session_state['broker_pos'].set_index('Account'), disabled=(['SYMBOL','Client']), use_container_width=True)
+  st.session_state['broker_pos'].update(edited_broker_pos.reset_index())
   #   CCP position
 
   st.markdown("<p style='text-align: center; margin-top: 15px; margin-bottom: 5px;'font-size:16px;'>Broker Positions in CCP</p>", unsafe_allow_html=True)
