@@ -39,8 +39,10 @@ if st.session_state['example'] == "Single instrument":
 
   ###Editable option attributes###
   st.sidebar.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Option Attributes</p>", unsafe_allow_html=True)
-  instrument = {'Attribute':['Symbol','Type','Contract size','Strike','Underlying', 'EDSP'],'Value':['Opt1','Call',1000,500,'Und1',1200]}
-  st.session_state['instrument'] = pd.DataFrame(instrument)
+  if 'instrument' not in st.session_state:
+    instrument = {'Attribute': ['Symbol', 'Type', 'Contract size', 'Strike', 'Underlying', 'EDSP'],
+                  'Value': ['Opt1', 'Call', 1000, 500, 'Und1', 1200]}
+    st.session_state['instrument'] = pd.DataFrame(instrument) 
   edited_instrument = st.sidebar.data_editor(st.session_state['instrument'].set_index('Attribute'), use_container_width=True)
   st.session_state['instrument'].update(edited_instrument.reset_index())
 
