@@ -130,9 +130,9 @@ if st.session_state['example'] == "Single instrument":
       
       ###Let's calculate option parameters###
       
-      option_type = st.session_state['instrument'].loc[1,'Value']
-      strike = float(st.session_state['instrument'].loc[3,'Value'])
-      settlement_price = float(st.session_state['instrument'].loc[5,'Value'])
+      option_type = st.session_state['instrument'].loc['Type','Value']
+      strike = float(st.session_state['instrument'].loc['Strike','Value'])
+      settlement_price = float(st.session_state['instrument'].loc['EDSP','Value'])
       intrinsic, moneyess_perc, inthemoney = moneyness(option_type,strike,settlement_price)
       moneyess_perc = round(moneyess_perc*100,2)
       
