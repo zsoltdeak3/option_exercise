@@ -98,7 +98,7 @@ if st.session_state['example'] == "Single instrument":
 
   #   Broker positions
 
-  st.markdown("<p style='text-align: center; margin-top: 15px; margin-bottom: 5px;'font-size:16px;'>Broker Positions in FO system (editable)</p>", unsafe_allow_html=True)
+  st.markdown("<p style='text-align: center; margin-top: 15px; margin-bottom: 5px;'font-size:16px;'>Broker Positions in BO system (editable)</p>", unsafe_allow_html=True)
   
   broker_pos = {'Account':['Client1', 'Client2', 'Client3', 'Client4','House'],'Account type':['Client', 'Client', 'Client', 'Client','House'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1','Opt1'], 'Net position':[10, 10, -15,-12, 19]}
   st.session_state['broker_pos'] = pd.DataFrame(broker_pos)
@@ -112,16 +112,17 @@ if st.session_state['example'] == "Single instrument":
   st.session_state['net_client_pos'] = st.session_state['broker_pos'][st.session_state['broker_pos']['Account type'] == 'Client']['Net position'].sum()
   st.session_state['net_house_pos'] = st.session_state['broker_pos'][st.session_state['broker_pos']['Account type'] == 'House']['Net position'].sum()
 
-  ccp_pos = {'CCP account':['Net omnibus', 'House'], 'SYMBOL':['Opt1','Opt1'], 'Net position': [st.session_state['net_client_pos'],st.session_state['net_house_pos']]}
+  ccp_pos = {'Account':['Client', 'House'],'Account type':['Net omnibus', 'House'], 'SYMBOL':['Opt1','Opt1'], 'Net position': [st.session_state['net_client_pos'],st.session_state['net_house_pos']]}
   st.session_state['ccp_pos'] = pd.DataFrame(ccp_pos)
-  edited_ccp_pos = st.data_editor(st.session_state['ccp_pos'],disabled=(['CCP account','SYMBOL','Net position']),use_container_width=True)
-  st.session_state['ccp_pos'].update(edited_ccp_pos.reset_index())
+  edited_ccp_pos = st.data_editor(st.session_state['ccp_pos'].set_index('Account'),disabled=(['CCP account','SYMBOL','Net position']),use_container_width=True)
+  st.session_state['ccp_pos'].update(edited_ccp_pos)
 
   ### To decide if options should be exercised ###
   st.markdown(
     """
     <div style="
         background-color: #f0f0f0;
+        margin-bottom: 10px;
         padding: 10px; 
         border-radius: 10px;
         text-align: center;
@@ -131,9 +132,11 @@ if st.session_state['example'] == "Single instrument":
         <b>Step 3:</b> Determine whether to exercise options. </div>
     """,unsafe_allow_html=True)
     #Empty line
-  st.markdown("<p style='text-align: center; margin-top: 5px; margin-bottom: 5px;'font-size:16px;", unsafe_allow_html=True)  
-  if 'decision_table' not in st.session_state:  
-      decision_table = pd.concat([st.session_state['ccp_pos'].drop(columns=[])])  
+  ifexercise = st.button(label='Decide if exercise')  
+  st.markdown("<p style='text-align: center; margin-top: 5px; margin-bottom: 5px;'font-size:16px;", unsafe_allow_html=True)
+  if ifexercise:
+      if 'decision_table' not in st.session_state:  
+          decision_table = pd.concat([st.session_state['ccp_pos'].drop(columns=[])])  
     ### SETTLEMENT FLOWS ###
   st.markdown(
     """
