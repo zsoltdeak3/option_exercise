@@ -32,20 +32,12 @@ if st.session_state['example'] == "Single instrument":
   CCPexercisefee = st.sidebar.number_input('CCP exercise fee (QAR)',min_value=0.00, value=0.50, step=0.01,format="%.2f")
   Brokerexercisefee = st.sidebar.number_input('Broker exercise fee (QAR)',min_value=0.00, value=0.50, step=0.01,format="%.2f")
 
-  ###Editable option attributes###
-  st.sidebar.markdown("<p style='text-align: center; margin-bottom: -10px;'font-size:18px;'>Option Attributes</p>", unsafe_allow_html=True)
-  if 'instrument' not in st.session_state:
-      instrument = pd.DataFrame({'Attribute': ['Symbol', 'Type', 'Contract size', 'Strike', 'Underlying', 'EDSP'],'Value': ['Opt1', 'Call', 1000, 500, 'Und1', 1200]})
-      st.session_state['instrument'] = instrument
-  st.session_state['instrument'] = st.sidebar.data_editor(st.session_state['instrument'],disabled=['Attribute'],use_container_width=True)
-
   #settlement_parameters = pd.DataFrame({'Attribute':['Moneyness','Intrinsic value','Is in the money'],'Value':[f'{moneyess_perc}%',intrinsic,inthemoney]})
   #st.session_state['settlement_parameters'] = st.sidebar.data_editor(settlement_parameters,hide_index=True, disabled=(['Attribute','Value']), use_container_width=True)
 
   exercise_button = st.sidebar.button(label='Settlement calculation')
   
   ### MAIN SCREEN ###
-  
   st.markdown(
     """
     <div style="
@@ -56,9 +48,28 @@ if st.session_state['example'] == "Single instrument":
         color: black;
         font-size: 18px;
         border: 1px solid #ddd;">
-        <b>Step 1:</b> QCCP disseminates the Option EDSP prices through sFTP report after 12:15pm </div>
+        <b>Step 1:</b> BO system receives the instrument details in the morning through MITCH. Some of the details must be decoded from the SYMBOL (please see TOM doc) </div>
+    """,unsafe_allow_html=True)
+    
+  st.markdown(
+    """
+    <div style="
+        background-color: #f0f0f0;
+        padding: 10px; 
+        border-radius: 10px;
+        text-align: center;
+        color: black;
+        font-size: 18px;
+        border: 1px solid #ddd;">
+        <b>Step 2:</b> QCCP disseminates the Option EDSP prices through sFTP report after 12:15pm </div>
     """,unsafe_allow_html=True)
 
+  ###Editable option attributes###
+  if 'instrument' not in st.session_state:
+      instruments = pd.DataFrame({'SYMBOL':['Opt1'], 'Type':['Call'], 'Contract size':[1000], 'Strike':[500],'Underlying':['ABC']})
+      st.session_state['instrument'] = instrument
+  st.session_state['instrument'] = st.sidebar.data_editor(st.session_state['instrument'],disabled=['Attribute'],use_container_width=True)
+    
   c1, c2, c3 = st.columns([1,3,1])
   
   #     EDSP
@@ -84,14 +95,14 @@ if st.session_state['example'] == "Single instrument":
         color: black;
         font-size: 18px;
         border: 1px solid #ddd;">
-        <b>Step 2:</b> As trading stops with expiring instruments at 12:15pm, the final positions are known for both client and house accounts. The decision to exercise or not can be made. </div>
+        <b>Step 3:</b> As trading stops with expiring instruments at 12:15pm, the final positions are known for both client and house accounts. The decision to exercise or not can be made. </div>
     """,unsafe_allow_html=True)
 
   #   Broker positions
 
   st.markdown("<p style='text-align: center; margin-top: 15px; margin-bottom: 5px;'font-size:16px;'>Broker Positions in BO system (editable)</p>", unsafe_allow_html=True)
   
-  broker_pos = {'Account':['Client1', 'Client2', 'Client3', 'Client4','House'],'Account type':['Client', 'Client', 'Client', 'Client','House'], 'SYMBOL':['Opt1', 'Opt1', 'Opt1', 'Opt1','Opt1'], 'Net position':[10, 10, -15,-12, 19]}
+  broker_pos = {'Account':['Client1', 'Client2', 'Client3', 'Client4','House'],'Account type':['Client', 'Client', 'Client', 'Client','House'], '':['Opt1', 'Opt1', 'Opt1', 'Opt1','Opt1'], 'Net position':[10, 10, -15,-12, 19]}
   st.session_state['broker_pos'] = pd.DataFrame(broker_pos)
   
   edited_broker_pos = st.data_editor(st.session_state['broker_pos'].set_index('Account'), disabled=(['SYMBOL','Client']), use_container_width=True)
@@ -120,7 +131,7 @@ if st.session_state['example'] == "Single instrument":
         color: black;
         font-size: 18px;
         border: 1px solid #ddd;">
-        <b>Step 3:</b> Determine whether to exercise options. </div>
+        <b>Step 4:</b> Determine whether to exercise options. </div>
     """,unsafe_allow_html=True)
     #Empty line
   ifexercise = st.button(label='Decide if exercise')  
@@ -151,7 +162,7 @@ if st.session_state['example'] == "Single instrument":
         color: black;
         font-size: 18px;
         border: 1px solid #ddd;">
-        <b>Step 4:</b> Calculate settlement flows. </div>
+        <b>Step 5:</b> Calculate settlement flows. </div>
     """,unsafe_allow_html=True)
  
   if exercise_button:
