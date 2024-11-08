@@ -55,7 +55,7 @@ if st.session_state['example'] == "Single instrument":
   st.markdown("<p style='text-align: center; margin-top: 15px; margin-bottom: 5px;'font-size:16px;'>Instrument details (editable)</p>", unsafe_allow_html=True)
   if 'instruments' not in st.session_state:
       instruments = pd.DataFrame({'SYMBOL':['Opt1'], 'Type':['Call'], 'Contract size':[1000], 'Strike':[500],'Underlying':['ABC']})
-      st.session_state['instruments'] = instrument
+      st.session_state['instruments'] = instruments
   st.session_state['instruments'] = st.data_editor(st.session_state['instruments'],disabled=['Attribute'],use_container_width=True)
     
   st.markdown(
