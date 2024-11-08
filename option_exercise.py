@@ -135,8 +135,7 @@ if st.session_state['example'] == "Single instrument":
   ifexercise = st.button(label='Decide if exercise')  
   st.markdown("<p style='text-align: center; margin-top: 5px; margin-bottom: 5px;'font-size:16px;", unsafe_allow_html=True)
   if ifexercise:
-      if 'decision_table' not in st.session_state:  
-          decision_table = pd.concat([st.session_state['ccp_pos'].drop(columns=[])])  
+      st.table(st.session_state['broker_pos'])
     ### SETTLEMENT FLOWS ###
   st.markdown(
     """
