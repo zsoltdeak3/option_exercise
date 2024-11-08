@@ -51,6 +51,12 @@ if st.session_state['example'] == "Single instrument":
         <b>Step 1:</b> BO system receives the instrument details in the morning through MITCH. Some of the details must be decoded from the SYMBOL (please see TOM doc) </div>
     """,unsafe_allow_html=True)
     
+  ###Editable option attributes###
+  if 'instrument' not in st.session_state:
+      instruments = pd.DataFrame({'SYMBOL':['Opt1'], 'Type':['Call'], 'Contract size':[1000], 'Strike':[500],'Underlying':['ABC']})
+      st.session_state['instrument'] = instrument
+  st.session_state['instrument'] = st.data_editor(st.session_state['instrument'],disabled=['Attribute'],use_container_width=True)
+    
   st.markdown(
     """
     <div style="
@@ -64,12 +70,6 @@ if st.session_state['example'] == "Single instrument":
         <b>Step 2:</b> QCCP disseminates the Option EDSP prices through sFTP report after 12:15pm </div>
     """,unsafe_allow_html=True)
 
-  ###Editable option attributes###
-  if 'instrument' not in st.session_state:
-      instruments = pd.DataFrame({'SYMBOL':['Opt1'], 'Type':['Call'], 'Contract size':[1000], 'Strike':[500],'Underlying':['ABC']})
-      st.session_state['instrument'] = instrument
-  st.session_state['instrument'] = st.sidebar.data_editor(st.session_state['instrument'],disabled=['Attribute'],use_container_width=True)
-    
   c1, c2, c3 = st.columns([1,3,1])
   
   #     EDSP
