@@ -134,8 +134,9 @@ if st.session_state['example'] == "Single instrument":
     #Empty line
   ifexercise = st.button(label='Decide if exercise')  
   st.markdown("<p style='text-align: center; margin-top: 5px; margin-bottom: 5px;'font-size:16px;", unsafe_allow_html=True)
+  
   if ifexercise:
-      st.table(st.session_state['broker_pos'])
+      st.table(st.session_state['broker_pos']).set_index('Account')
     ### SETTLEMENT FLOWS ###
   st.markdown(
     """
