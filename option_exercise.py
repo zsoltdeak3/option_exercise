@@ -80,7 +80,7 @@ if st.session_state['example'] == "Single instrument":
   c2.markdown(
     """
     <p style="text-align: center; margin-top: 15px; margin-bottom: 5px; font-size: 16px;">
-        Option expiry settlement prices (EDSP)
+        Option expiry settlement prices - EDSP (editable)
     </p>
     """,
     unsafe_allow_html=True)
