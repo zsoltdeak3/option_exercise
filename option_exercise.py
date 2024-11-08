@@ -136,7 +136,7 @@ if st.session_state['example'] == "Single instrument":
   st.markdown("<p style='text-align: center; margin-top: 5px; margin-bottom: 5px;'font-size:16px;", unsafe_allow_html=True)
   
   if ifexercise:
-      st.table(st.session_state['broker_pos'].reset_index('Account'))
+      st.table(st.session_state['broker_pos'].reset_index())
 
     
     ### SETTLEMENT FLOWS ###
