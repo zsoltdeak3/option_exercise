@@ -53,12 +53,9 @@ if st.session_state['example'] == "Single instrument":
     
   ###Editable option attributes###
   st.markdown("<p style='text-align: center; margin-top: 15px; margin-bottom: 5px;'font-size:16px;'>Instrument details (editable)</p>", unsafe_allow_html=True)
-  if 'instruments' not in st.session_state:
-      instruments = pd.DataFrame({'SYMBOL':['Opt1'], 'Type':['Call'], 'Contract size':[1000], 'Strike':[500],'Underlying':['ABC']})
-      st.session_state['instruments'] = instruments
-  temp_instruments = st.session_state['instruments'].reset_index(drop=True)
-  edited_instruments = st.data_editor(temp_instruments, use_container_width=True)
-  st.session_state['instruments'] = edited_instruments
+  instruments = pd.DataFrame({'SYMBOL':['Opt1'], 'Type':['Call'], 'Contract size':[1000], 'Strike':[500],'Underlying':['ABC']})
+  instruments = instruments.set_index('SYMBOL')
+  st.session_state['instruments'] = st.data_editor(instruments, disabled=('SYMBOL') use_container_width=True)
     
   st.markdown(
     """
