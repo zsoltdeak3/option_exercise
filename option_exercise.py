@@ -56,7 +56,9 @@ if st.session_state['example'] == "Single instrument":
   if 'instruments' not in st.session_state:
       instruments = pd.DataFrame({'SYMBOL':['Opt1'], 'Type':['Call'], 'Contract size':[1000], 'Strike':[500],'Underlying':['ABC']})
       st.session_state['instruments'] = instruments
-  st.session_state['instruments'] = st.data_editor(st.session_state['instruments'].reset_index(drop=True),use_container_width=True)
+  temp_instruments = st.session_state['instruments'].reset_index(drop=True)
+  edited_instruments = st.data_editor(temp_instruments, use_container_width=True)
+  st.session_state['instruments'] = edited_instruments
     
   st.markdown(
     """
