@@ -73,9 +73,7 @@ if st.session_state['example'] == "Single instrument":
   c1, c2, c3 = st.columns([1,3,1])
   
   #     EDSP
-
-  st.session_state['edsp_df'] = pd.DataFrame({'Underlying':['ABC'], 'EDSP':[1000]})
-  st.session_state['edsp_df_woi'] = st.session_state['edsp_df'].set_index('Underlying')
+  edsp_df = = pd.DataFrame({'Underlying':['ABC'], 'EDSP':[1000]}).set_index('Underlying')
   c2.markdown(
     """
     <p style="text-align: center; margin-top: 15px; margin-bottom: 5px; font-size: 16px;">
@@ -83,7 +81,7 @@ if st.session_state['example'] == "Single instrument":
     </p>
     """,
     unsafe_allow_html=True)
-  c2.data_editor(st.session_state['edsp_df_woi'], use_container_width=True)
+  st.session_state['edsp_df'] = c2.data_editor(edsp_df, use_container_width=True)
 
   st.markdown(
     """
@@ -102,7 +100,7 @@ if st.session_state['example'] == "Single instrument":
 
   st.markdown("<p style='text-align: center; margin-top: 15px; margin-bottom: 5px;'font-size:16px;'>Broker Positions in BO system (editable)</p>", unsafe_allow_html=True)
   
-  broker_pos = {'Account':['Client1', 'Client2', 'Client3', 'Client4','House'],'Account type':['Client', 'Client', 'Client', 'Client','House'], '':['Opt1', 'Opt1', 'Opt1', 'Opt1','Opt1'], 'Net position':[10, 10, -15,-12, 19]}
+  broker_pos = {'Account':['Client1', 'Client2', 'Client3', 'Client4','House'],'Account type':['Client', 'Client', 'Client', 'Client','House'], 'Symbol':['Opt1', 'Opt1', 'Opt1', 'Opt1','Opt1'], 'Net position':[10, 10, -15,-12, 19]}
   broker_pos = pd.DataFrame(broker_pos).set_index('Account')
   
   st.session_state['broker_pos'] = st.data_editor(broker_pos, disabled=(['SYMBOL','Client']), use_container_width=True)
@@ -134,7 +132,12 @@ if st.session_state['example'] == "Single instrument":
         <b>Step 4:</b> Determine whether to exercise options. </div>
     """,unsafe_allow_html=True)
     #Empty line
-  ifexercise = st.button(label='Decide if exercise')  
+  moneyness_df = st.session_state['broker_pos'].set_index('Symbol').join(st.session_state['instruments'][['Strike', 'Contract Size']], how='left')
+  moneyness_df = moneyness_df.join(st.session_state['edsp_df'][['EDSP']], how='left')
+  moneyness_df ['Moneyness'] = np.divide(moneyness_df['Strike'],moneyness_df['EDSP'])
+  moneyness_df = moneyness_df.reset_index(drop=False)
+  st.dataframe(moneyness_df, hide_index=True)
+ifexercise = st.button(label='Decide if exercise')  
   st.markdown("<p style='text-align: center; margin-top: 5px; margin-bottom: 5px;'font-size:16px;", unsafe_allow_html=True)
   
   if ifexercise:
