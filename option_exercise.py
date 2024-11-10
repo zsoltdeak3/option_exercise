@@ -103,10 +103,10 @@ if st.session_state['example'] == "Single instrument":
   st.markdown("<p style='text-align: center; margin-top: 15px; margin-bottom: 5px;'font-size:16px;'>Broker Positions in BO system (editable)</p>", unsafe_allow_html=True)
   
   broker_pos = {'Account':['Client1', 'Client2', 'Client3', 'Client4','House'],'Account type':['Client', 'Client', 'Client', 'Client','House'], '':['Opt1', 'Opt1', 'Opt1', 'Opt1','Opt1'], 'Net position':[10, 10, -15,-12, 19]}
-  st.session_state['broker_pos'] = pd.DataFrame(broker_pos)
+  broker_pos = pd.DataFrame(broker_pos).set_index('Account')
   
-  edited_broker_pos = st.data_editor(st.session_state['broker_pos'].set_index('Account'), disabled=(['SYMBOL','Client']), use_container_width=True)
-  st.session_state['broker_pos'].update(edited_broker_pos.reset_index())
+  st.session_state['broker_pos'] = st.data_editor(broker_pos, disabled=(['SYMBOL','Client']), use_container_width=True)
+  # st.session_state['broker_pos'].update(edited_broker_pos.reset_index())
   #   CCP position
 
   st.markdown("<p style='text-align: center; margin-top: 15px; margin-bottom: 5px;'font-size:16px;'>Broker Positions in CCP (non-editable)</p>", unsafe_allow_html=True)
