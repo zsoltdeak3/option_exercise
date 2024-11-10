@@ -135,7 +135,7 @@ if st.session_state['example'] == "Single instrument":
   moneyness_df = st.session_state['broker_pos'].set_index('Symbol').join(st.session_state['instruments'][['Strike', 'Contract size', 'Underlying', 'Type']], how='left')
   moneyness_df = moneyness_df.set_index('Underlying', drop=False).join(st.session_state['edsp_df'][['EDSP']], how='left')
   moneyness_df ['Moneyness'] = np.where(moneyness_df['Strike'] == 'Put', np.divide(moneyness_df['Strike'],moneyness_df['EDSP']),
-                                         np.divide(moneyness_df['Strike'],moneyness_df['EDSP']))
+                                         np.divide(moneyness_df['EDSP'],moneyness_df['Strike']))
   moneyness_df = moneyness_df.reset_index(drop=True)
   st.dataframe(moneyness_df, hide_index=True)
   ifexercise = st.button(label='Decide if exercise')  
