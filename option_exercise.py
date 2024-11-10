@@ -147,7 +147,7 @@ if st.session_state['example'] == "Single instrument":
       intrinsic, moneyess_perc, inthemoney = moneyness(option_type,strike,settlement_price)
       moneyess_perc = round(moneyess_perc*100,2)
       
-      st.table(st.session_state['broker_pos'].reset_index(drop=True))
+      st.table(st.session_state['broker_pos'])
 
     
     ### SETTLEMENT FLOWS ###
