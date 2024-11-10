@@ -73,7 +73,7 @@ if st.session_state['example'] == "Single instrument":
   c1, c2, c3 = st.columns([1,3,1])
   
   #     EDSP
-  edsp_df = = pd.DataFrame({'Underlying':['ABC'], 'EDSP':[1000]}).set_index('Underlying')
+  edsp_df = pd.DataFrame({'Underlying':['ABC'], 'EDSP':[1000]}).set_index('Underlying')
   c2.markdown(
     """
     <p style="text-align: center; margin-top: 15px; margin-bottom: 5px; font-size: 16px;">
