@@ -137,7 +137,7 @@ if st.session_state['example'] == "Single instrument":
   moneyness_df ['Moneyness'] = np.divide(moneyness_df['Strike'],moneyness_df['EDSP'])
   moneyness_df = moneyness_df.reset_index(drop=False)
   st.dataframe(moneyness_df, hide_index=True)
-ifexercise = st.button(label='Decide if exercise')  
+  ifexercise = st.button(label='Decide if exercise')  
   st.markdown("<p style='text-align: center; margin-top: 5px; margin-bottom: 5px;'font-size:16px;", unsafe_allow_html=True)
   
   if ifexercise:
